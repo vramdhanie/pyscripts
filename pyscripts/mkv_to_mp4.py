@@ -1,3 +1,31 @@
+"""
+MKV to MP4 Converter
+
+This script provides a simple file dialog interface for converting MKV video files to MP4 format
+using FFmpeg. It performs fast conversion by copying the video stream without re-encoding,
+while converting audio to AAC format for better compatibility.
+
+Features:
+- Fast conversion without video re-encoding (stream copy)
+- Audio conversion to AAC format for MP4 compatibility
+- Simple file selection dialogs
+- Console output for progress tracking
+- Error handling for conversion failures
+
+Dependencies:
+- FFmpeg (system requirement for video conversion)
+- tkinter (standard library for file dialogs)
+- subprocess (standard library for FFmpeg calls)
+
+Usage:
+    uv run python pyscripts/mkv_to_mp4.py
+    or
+    poetry run python pyscripts/mkv_to_mp4.py
+
+Note: This tool is designed for quick format conversion where video quality preservation
+is important, as it avoids re-encoding the video stream.
+"""
+
 import subprocess
 from tkinter import Tk, filedialog
 
