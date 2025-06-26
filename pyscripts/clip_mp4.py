@@ -1,3 +1,12 @@
+"""
+Video Clipper GUI Tool
+
+This script provides a simple Tkinter-based GUI for clipping segments from MP4 video files.
+Users can select an input video, specify start and end times, and save the clipped segment as a new file.
+
+Requires: moviepy, tkinter (standard library)
+"""
+
 import tkinter as tk
 from tkinter import filedialog
 from moviepy.video.io.VideoFileClip import VideoFileClip
