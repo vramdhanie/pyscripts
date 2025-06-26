@@ -5,13 +5,14 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![Ruff](https://img.shields.io/badge/lint-ruff-red.svg)](https://github.com/astral-sh/ruff)
 
-A collection of Python scripts for video processing and manipulation tasks. This project provides simple GUI tools for common video operations like clipping, compression, and format conversion.
+A collection of Python scripts for video processing and data analysis tasks. This project provides simple GUI tools for common video operations and data analysis utilities.
 
 ## Features
 
 - **Video Clipping**: Extract specific segments from MP4 videos with a user-friendly GUI
 - **Video Compression**: Reduce video file sizes while maintaining quality
 - **Format Conversion**: Convert MKV files to MP4 format using FFmpeg
+- **Processing Date Estimator**: Analyze historical data to estimate when processing dates will reach a target
 
 ## Prerequisites
 
@@ -99,6 +100,27 @@ uv run python pyscripts/mkv_to_mp4.py
 - Audio conversion to AAC format
 - Simple file selection interface
 
+### Processing Date Estimator (`estimator.py`)
+
+Analyze historical processing date data to estimate when a specific eligibility date will be reached.
+
+```bash
+uv run python pyscripts/estimator.py
+```
+
+**Features:**
+- Linear regression analysis of processing trends
+- Interactive matplotlib visualizations
+- Automatic date parsing and conversion
+- Projection lines for future estimates
+- Visual markers for target dates
+- Reads data from `data/processing_data.json`
+
+**Data Format:**
+The script reads from `data/processing_data.json` which should contain:
+- `eligibility_date_str`: Target date to estimate (e.g., "1 March 2024")
+- `data`: Object with "Recorded Date" and "Current Processing Date" arrays
+
 ## Development
 
 ### Project Structure
@@ -109,7 +131,10 @@ pyscripts/
 │   ├── __init__.py
 │   ├── clip_mp4.py      # Video clipping tool
 │   ├── reduce_mp4.py    # Video compression tool
-│   └── mkv_to_mp4.py    # MKV to MP4 converter
+│   ├── mkv_to_mp4.py    # MKV to MP4 converter
+│   └── estimator.py     # Processing date estimator
+├── data/
+│   └── processing_data.json  # Input data for estimator
 ├── tests/
 ├── pyproject.toml       # Project configuration
 ├── uv.lock             # Dependency lock file
@@ -119,6 +144,9 @@ pyscripts/
 ### Dependencies
 
 - **moviepy**: Video editing and processing
+- **pandas**: Data manipulation and analysis
+- **matplotlib**: Data visualization and plotting
+- **numpy**: Numerical computations
 - **tkinter**: GUI framework (included with Python)
 - **subprocess**: System command execution (standard library)
 
