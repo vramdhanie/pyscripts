@@ -35,10 +35,9 @@ import matplotlib.dates as mdates
 from datetime import datetime
 import numpy as np
 import json
-import os
 
 
-def load_data_from_json(file_path: str = "data/processing_data.json"):
+def load_data_from_json(file_path: str = "data/processing_data.json") -> tuple[dict[str, list[str]] | None, str | None]:
     """Load data from JSON file."""
     try:
         with open(file_path, 'r') as f:
@@ -52,7 +51,7 @@ def load_data_from_json(file_path: str = "data/processing_data.json"):
         return None, None
 
 
-def estimate_processing_date(data: dict[str, list[str]], eligibility_date_str: str = "1 March 2024"):
+def estimate_processing_date(data: dict[str, list[str]], eligibility_date_str: str = "1 March 2024") -> None:
     df = pd.DataFrame(data)
 
     df["Recorded Date"] = pd.to_datetime(df["Recorded Date"], format="%B %Y")
@@ -73,10 +72,10 @@ def estimate_processing_date(data: dict[str, list[str]], eligibility_date_str: s
     plt.figure(figsize=(12, 8))
     
     # Plot the actual data points
-    plt.scatter(df["Recorded Date"], df["Current Processing Date"], color='blue', s=50, label="Recorded Data Points")
+    plt.scatter(df["Recorded Date"].to_numpy(), df["Current Processing Date"].to_numpy(), color='blue', s=50, label="Recorded Data Points")
     
     # Plot the trend line through actual data
-    plt.plot(df["Recorded Date"], df["Current Processing Date"], color='blue', linestyle='dashed', alpha=0.7)
+    plt.plot(df["Recorded Date"].to_numpy(), df["Current Processing Date"].to_numpy(), color='blue', linestyle='dashed', alpha=0.7)
 
     # Create a reasonable projection range (extend 2 years beyond the last recorded date)
     last_recorded_date = df["Recorded Date"].max()
@@ -87,7 +86,7 @@ def estimate_processing_date(data: dict[str, list[str]], eligibility_date_str: s
     projection_processing_dates = pd.to_datetime([datetime.fromordinal(int(poly(d.toordinal()))) for d in projection_dates])
     
     # Plot the projection line
-    plt.plot(projection_dates, projection_processing_dates, color='red', linestyle='-', linewidth=2, label="Projection")
+    plt.plot(projection_dates.values, projection_processing_dates.values, color='red', linestyle='-', linewidth=2, label="Projection")
 
     # Add horizontal line for eligibility date
     plt.axhline(y=float(mdates.date2num(eligibility_date)), color='green', linestyle='--', linewidth=2, label=f"Eligibility Date ({eligibility_date.strftime('%d %b %Y')})")
@@ -122,7 +121,7 @@ def estimate_processing_date(data: dict[str, list[str]], eligibility_date_str: s
     print(f"Processing dates span from {df['Current Processing Date'].min().strftime('%d %b %Y')} to {df['Current Processing Date'].max().strftime('%d %b %Y')}")
 
 
-def main():
+def main() -> None:
     """Main function to run the estimator."""
     data, eligibility_date_str = load_data_from_json()
     
