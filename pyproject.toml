@@ -1,3 +1,16 @@
+[project]
+name = "pyscripts"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Your Name", email = "you@example.com"}
+]
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "moviepy==1.0.3",
+]
+
 [tool.poetry]
 name = "pyscripts"
 version = "0.1.0"
