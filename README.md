@@ -119,7 +119,23 @@ uv run python pyscripts/estimator.py
 **Data Format:**
 The script reads from `data/processing_data.json` which should contain:
 - `eligibility_date_str`: Target date to estimate (e.g., "1 March 2024")
-- `data`: Object with "Recorded Date" and "Current Processing Date" arrays
+- `data`: Object with "Recorded Date" and "Current Processing Date" arrays (actual data)
+- `speculative_data`: Optional object with "Recorded Date" and "Current Processing Date" arrays (speculative scenario)
+
+**Example JSON structure:**
+```json
+{
+  "eligibility_date_str": "1 March 2024",
+  "data": {
+    "Recorded Date": ["April 2024", "May 2024", ...],
+    "Current Processing Date": ["15 Jan 2023", "15 Jan 2023", ...]
+  },
+  "speculative_data": {
+    "Recorded Date": ["April 2024", "May 2024", ...],
+    "Current Processing Date": ["15 Feb 2023", "15 Feb 2023", ...]
+  }
+}
+```
 
 ## Development
 
