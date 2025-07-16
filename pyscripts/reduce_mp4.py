@@ -55,7 +55,7 @@ def get_video_info(input_file):
         return None, None
 
 
-def compress_video(input_file, output_file, target_size_mb, crf=23, preset="medium"):
+def compress_video(input_file, output_file, target_size_mb: float, crf=23, preset="medium"):
     """Compress the video to meet the target file size."""
     try:
         # Get video duration and original bitrate
