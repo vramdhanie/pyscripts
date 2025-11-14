@@ -13,6 +13,7 @@ A collection of Python scripts for video processing and data analysis tasks. Thi
 - **Video Compression**: Reduce video file sizes while maintaining quality
 - **Format Conversion**: Convert MKV files to MP4 format using FFmpeg
 - **Processing Date Estimator**: Analyze historical data to estimate when processing dates will reach a target
+ - **Google Drive Folder Copy**: Recursively copy a Drive folder to another location on Drive
 
 ## Prerequisites
 
@@ -137,6 +138,30 @@ The script reads from `data/processing_data.json` which should contain:
 }
 ```
 
+### Google Drive Folder Copy (`copy_drive_folder.py`)
+
+Recursively copy a folder (and all its contents) to another location on your Google Drive.
+
+```bash
+uv run python pyscripts/copy_drive_folder.py --src-id <SRC_FOLDER_ID> --dst-id <DEST_PARENT_FOLDER_ID> [--new-name "<NEW_NAME>"] [--dry-run]
+```
+
+- `--src-id`: ID of the source folder to copy
+- `--dst-id`: ID of the destination parent folder where the copy will be created
+- `--new-name`: Optional new name for the root of the copied folder tree
+- `--dry-run`: Print the plan without creating anything
+- `--credentials`: Path to OAuth client secrets JSON (default: `credentials.json`)
+- `--token`: Path to token cache JSON (default: `token.json`)
+
+Notes:
+- Folder IDs can be obtained from the URL in Google Drive (the long alphanumeric string).
+- On first run, a browser window will open to authorize access; a `token.json` will be created for subsequent runs.
+
+Prerequisites for Drive:
+1. In Google Cloud Console, create an OAuth 2.0 Client ID (Desktop app) and download the JSON.
+2. Save it as `credentials.json` in the project root (or pass `--credentials`).
+3. Ensure the scopes requested are acceptable (`https://www.googleapis.com/auth/drive` is used).
+
 ## Development
 
 ### Project Structure
@@ -148,7 +173,8 @@ pyscripts/
 │   ├── clip_mp4.py      # Video clipping tool
 │   ├── reduce_mp4.py    # Video compression tool
 │   ├── mkv_to_mp4.py    # MKV to MP4 converter
-│   └── estimator.py     # Processing date estimator
+│   ├── estimator.py     # Processing date estimator
+│   └── copy_drive_folder.py  # Google Drive folder copy tool
 ├── data/
 │   └── processing_data.json  # Input data for estimator
 ├── tests/
@@ -163,6 +189,7 @@ pyscripts/
 - **pandas**: Data manipulation and analysis
 - **matplotlib**: Data visualization and plotting
 - **numpy**: Numerical computations
+- **google-api-python-client**, **google-auth-httplib2**, **google-auth-oauthlib**: Google Drive API access
 - **tkinter**: GUI framework (included with Python)
 - **subprocess**: System command execution (standard library)
 
