@@ -72,7 +72,9 @@ uv run python pyscripts/clip_mp4.py
 - Select input video file
 - Specify start and end times in seconds
 - Choose output location
-- Preview video duration
+- Shows video duration when a file is selected
+- Fast mode (default): stream copy, lossless and fast
+- Accurate mode: frame-precise re-encode when needed
 
 ### Video Compressor (`reduce_mp4.py`)
 
