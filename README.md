@@ -103,6 +103,19 @@ uv run python pyscripts/mkv_to_mp4.py
 - Audio conversion to AAC format
 - Simple file selection interface
 
+### Audio Extractor (`extract_audio.py`)
+
+Extract the audio track from a video file and save it as M4A.
+
+```bash
+uv run python pyscripts/extract_audio.py
+```
+
+**Features:**
+- Supports common video formats (MP4, MKV, MOV, etc.)
+- Lossless stream copy when audio is already AAC
+- Converts other audio codecs to AAC for M4A output
+
 ### Processing Date Estimator (`estimator.py`)
 
 Analyze historical processing date data to estimate when a specific eligibility date will be reached.
@@ -175,6 +188,7 @@ pyscripts/
 │   ├── clip_mp4.py      # Video clipping tool
 │   ├── reduce_mp4.py    # Video compression tool
 │   ├── mkv_to_mp4.py    # MKV to MP4 converter
+│   ├── extract_audio.py # Video to M4A audio extractor
 │   ├── estimator.py     # Processing date estimator
 │   └── copy_drive_folder.py  # Google Drive folder copy tool
 ├── data/
